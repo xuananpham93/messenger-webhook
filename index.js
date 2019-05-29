@@ -1,12 +1,15 @@
-'use strict';
+const express = require('express');
+const bodyParser = require('body-parser');
+var cors = require('cors')
 
-// Imports dependencies and set up http server
-const
-    express = require('express'),
-    bodyParser = require('body-parser'),
-    app = express().use(bodyParser.json()); // creates express http server
+const app = express();
+const port = process.env.PORT || 5000;
 
 app.use(cors());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.send('Hello World');
@@ -66,5 +69,6 @@ app.get('/webhook', (req, res) => {
     }
 });
 
-// Sets server port and logs message on success
-app.listen(process.env.PORT || 5000, () => console.log('webhook is listening'));
+app.listen(port, () => {
+    console.log('Start app ' + port);
+});
