@@ -6,6 +6,8 @@ const
     bodyParser = require('body-parser'),
     app = express().use(bodyParser.json()); // creates express http server
 
+app.use(cors());
+
 app.get('/', (req, res) => {
     res.send('Hello World');
 });
